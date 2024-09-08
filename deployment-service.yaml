@@ -31,6 +31,6 @@ spec:
     app: petclinic
   ports:
     - protocol: "TCP"
-      port: 80
+      port: 8083
       targetPort: 8085 
   type: LoadBalancer # type of the service.
