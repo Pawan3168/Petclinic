@@ -5,21 +5,17 @@ FROM openjdk:8
 
 
 #FROM amazoncorretto:17.0.8-alpine3.18
-    
-# Set the environment variable for the application directory
-ENV APP_HOME /usr/src/app
-
-# Create the application directory inside the container
-RUN mkdir -p $APP_HOME
-
-# Copy the JAR file into the application directory inside the container
-COPY target/*.jar $APP_HOME/app.jar
-
-# Set the working directory to the application directory
-WORKDIR $APP_HOME
-
-# Expose the application port (this should be the port your application listens to)
+    # Expose the port on which the application will run
 EXPOSE 8080
 
-# Command to run the JAR file
-CMD ["java", "-jar", "app.jar"]
+# Set the application directory path
+ENV APP_HOME /usr/src/app
+
+# Copy the JAR file from the target directory to the container
+COPY target/petclinic-0.0.1-SNAPSHOT.jar $APP_HOME/app.jar
+
+# Set the working directory
+WORKDIR $APP_HOME
+
+# Run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]
